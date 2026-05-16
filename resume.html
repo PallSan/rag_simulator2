@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pallavi Sankhe | Product & Program Leader</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: #e2e8f0;
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: auto;
+        padding: 40px 0;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    header h1 {
+        font-size: 2.8rem;
+        background: linear-gradient(90deg, #38bdf8, #818cf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+        margin-top: 10px;
+        color: #94a3b8;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 25px;
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+        color: #38bdf8;
+        margin-bottom: 15px;
+    }
+
+    .timeline-item {
+        margin-bottom: 20px;
+    }
+
+    .timeline-item h3 {
+        color: #e2e8f0;
+    }
+
+    .timeline-item span {
+        font-size: 0.85rem;
+        color: #94a3b8;
+    }
+
+    ul {
+        margin-top: 10px;
+        padding-left: 20px;
+    }
+
+    li {
+        margin-bottom: 6px;
+    }
+
+    .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .skill {
+        background: rgba(56,189,248,0.15);
+        padding: 8px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+    }
+
+    .metric {
+        color: #22c55e;
+        font-weight: bold;
+    }
+
+    .toggle {
+        cursor: pointer;
+        color: #818cf8;
+        font-size: 0.9rem;
+        margin-top: 8px;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 0.8rem;
+        color: #64748b;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <h1>Pallavi Sankhe</h1>
+    <p>Senior Program Manager | Product Strategy | Data-Driven Execution</p>
+    <p>Bellevue, WA • pallavi.sankhe93@gmail.com • 434-284-2598</p>
+</header>
+
+<div class="card">
+    <h2>🚀 Summary</h2>
+    <p>
+        Product and Program leader with 7+ years of experience driving large-scale initiatives across
+        tech, public sector, and analytics. Proven track record of delivering measurable impact —
+        from <span class="metric">$400K revenue generation</span> to
+        <span class="metric">62% operational improvements</span>.
+        Strong in cross-functional leadership, stakeholder management, and building scalable systems.
+    </p>
+</div>
+
+<div class="card">
+    <h2>💼 Experience</h2>
+
+    <div class="timeline-item">
+        <h3>Customer Success Manager — Sigmoid Analytics</h3>
+        <span>2024 – Present</span>
+        <ul>
+            <li>Led data transformation initiatives for a $14B CPG client</li>
+            <li>Improved architecture & standardized POS data systems</li>
+            <li>Generated <span class="metric">$400K</span> via sales enablement strategies</li>
+        </ul>
+    </div>
+
+    <div class="timeline-item">
+        <h3>Project Manager — Government of Maharashtra</h3>
+        <span>2021 – 2023</span>
+        <ul>
+            <li>Built digital platforms impacting 1M+ rural users</li>
+            <li>Reduced turnaround time by <span class="metric">70%</span></li>
+            <li>Led cross-functional collaboration across policy & engineering teams</li>
+        </ul>
+    </div>
+
+    <div class="timeline-item hidden" id="moreExp">
+        <h3>Associate Program Manager — Govt of Goa</h3>
+        <ul>
+            <li>Launched digital learning platform → <span class="metric">20% increase</span> in attendance</li>
+            <li>Managed vendor ecosystem and CSR partnerships</li>
+        </ul>
+
+        <h3>Consultant — Accenture</h3>
+        <ul>
+            <li>Delivered ERP solutions generating <span class="metric">$200K</span></li>
+            <li>Led system migration and enterprise transformations</li>
+        </ul>
+    </div>
+
+    <div class="toggle" onclick="toggleSection()">Show More</div>
+</div>
+
+<div class="card">
+    <h2>🧠 Skills</h2>
+    <div class="skills">
+        <div class="skill">Product Strategy</div>
+        <div class="skill">Program Management</div>
+        <div class="skill">SQL</div>
+        <div class="skill">Python</div>
+        <div class="skill">Tableau</div>
+        <div class="skill">Stakeholder Management</div>
+        <div class="skill">Data Analysis</div>
+        <div class="skill">Go-To-Market</div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>🎓 Education</h2>
+    <p><b>University of Virginia, Darden School of Business</b></p>
+    <p>MBA (Cum Laude)</p>
+    <br>
+    <p><b>VJTI Mumbai</b></p>
+    <p>B.Tech in Information Technology</p>
+</div>
+
+<div class="card">
+    <h2>🏆 Key Achievements</h2>
+    <ul>
+        <li>Recycled <span class="metric">62% plastic waste</span> via supply chain redesign</li>
+        <li>Scaled programs impacting <span class="metric">1M+ users</span></li>
+        <li>Delivered <span class="metric">$3M+</span> strategic partnerships</li>
+    </ul>
+</div>
+
+<footer>
+    Designed with a futuristic interface • 2026
+</footer>
+
+</div>
+
+<script>
+function toggleSection() {
+    const section = document.getElementById("moreExp");
+    const btn = document.querySelector(".toggle");
+
+    if (section.classList.contains("hidden")) {
+        section.classList.remove("hidden");
+        btn.innerText = "Show Less";
+    } else {
+        section.classList.add("hidden");
+        btn.innerText = "Show More";
+    }
+}
+</script>
+
+</body>
+</html>
