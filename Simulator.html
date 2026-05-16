@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RAG Simulator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+        background: #0f172a;
+        color: #e2e8f0;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    .card {
+        background: #1e293b;
+        border-radius: 16px;
+        padding: 16px;
+        margin: 12px 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .title {
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #38bdf8;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        resize: none;
+        font-size: 14px;
+    }
+
+    button {
+        background: linear-gradient(135deg, #3b82f6, #9333ea);
+        border: none;
+        padding: 12px 20px;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    button:hover {
+        opacity: 0.9;
+    }
+
+    .step {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.5s ease;
+    }
+
+    .step.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .pill {
+        display: inline-block;
+        background: #334155;
+        padding: 6px 10px;
+        border-radius: 999px;
+        margin: 4px;
+        font-size: 12px;
+    }
+
+    .vector {
+        font-family: monospace;
+        color: #a5f3fc;
+    }
+
+    .doc {
+        background: #334155;
+        padding: 10px;
+        border-radius: 8px;
+        margin: 6px 0;
+    }
+
+    .highlight {
+        color: #22c55e;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🧠 RAG Simulator</h1>
+    <p style="text-align:center; color:#94a3b8;">
+        Understand Retrieval Augmented Generation step-by-step
+    </p>
+
+    <!-- INPUT -->
+    <div class="card">
+        <div class="title">1️⃣ User Query</div>
+        <textarea id="query" rows="3" placeholder="Ask something like: What is RAG?"></textarea>
+        <button onclick="runRAG()">Run RAG</button>
+    </div>
+
+    <!-- EMBEDDING -->
+    <div id="embeddingStep" class="card step">
+        <div class="title">2️⃣ Convert Query → Vector Embedding</div>
+        <div id="embeddingOutput" class="vector"></div>
+    </div>
+
+    <!-- VECTOR SEARCH -->
+    <div id="retrievalStep" class="card step">
+        <div class="title">3️⃣ Retrieve Relevant Documents</div>
+        <div id="retrievedDocs"></div>
+    </div>
+
+    <!-- AUGMENTATION -->
+    <div id="augmentationStep" class="card step">
+        <div class="title">4️⃣ Augmented Prompt</div>
+        <div id="augmentedPrompt"></div>
+    </div>
+
+    <!-- FINAL OUTPUT -->
+    <div id="generationStep" class="card step">
+        <div class="title">5️⃣ LLM Generates Response</div>
+        <div id="finalResponse"></div>
+    </div>
+
+</div>
+
+<script>
+
+// Fake knowledge base
+const documents = [
+    "RAG stands for Retrieval Augmented Generation.",
+    "It improves LLM responses using external knowledge.",
+    "Embeddings convert text into vectors for similarity search.",
+    "Vector databases store embeddings for fast retrieval.",
+    "RAG reduces hallucinations in AI systems."
+];
+
+// Fake embedding generator
+function fakeEmbedding(text) {
+    return Array.from({length: 5}, () => Math.random().toFixed(2));
+}
+
+// Fake similarity scoring
+function similarity(query, doc) {
+    return doc.toLowerCase().includes(query.toLowerCase()) ? 1 : Math.random();
+}
+
+function runRAG() {
+
+    let query = document.getElementById("query").value;
+
+    if (!query) {
+        alert("Enter a query!");
+        return;
+    }
+
+    resetSteps();
+
+    // Step 1: Embedding
+    setTimeout(() => {
+        let embedding = fakeEmbedding(query);
+        document.getElementById("embeddingOutput").innerText =
+            "[" + embedding.join(", ") + "]";
+        showStep("embeddingStep");
+    }, 500);
+
+    // Step 2: Retrieval
+    setTimeout(() => {
+        let rankedDocs = documents
+            .map(doc => ({ doc, score: similarity(query, doc) }))
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 3);
+
+        let html = "";
+        rankedDocs.forEach(d => {
+            html += `<div class="doc">📄 ${d.doc}</div>`;
+        });
+
+        document.getElementById("retrievedDocs").innerHTML = html;
+        window.retrieved = rankedDocs.map(d => d.doc);
+        showStep("retrievalStep");
+    }, 1200);
+
+    // Step 3: Augmentation
+    setTimeout(() => {
+        let augmented = `
+            <div class="pill">User Query</div> ${query} <br><br>
+            <div class="pill">Context</div><br>
+            ${window.retrieved.join("<br>")}
+        `;
+        document.getElementById("augmentedPrompt").innerHTML = augmented;
+        showStep("augmentationStep");
+    }, 2000);
+
+    // Step 4: Generation
+    setTimeout(() => {
+        let response = `
+            Based on retrieved context, here is the answer:<br><br>
+            <span class="highlight">
+            RAG uses retrieved documents to improve response accuracy.
+            </span>
+        `;
+        document.getElementById("finalResponse").innerHTML = response;
+        showStep("generationStep");
+    }, 2800);
+}
+
+function showStep(id) {
+    document.getElementById(id).classList.add("active");
+}
+
+function resetSteps() {
+    document.querySelectorAll(".step").forEach(el => {
+        el.classList.remove("active");
+    });
+}
+
+</script>
+
+</body>
+</html>
